@@ -7,7 +7,14 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "core-js": "^3.8.3",
+    "@eva/eva.js": "^1.2.6",
+    "@eva/plugin-renderer": "^1.2.6",
+    "@eva/plugin-renderer-graphics": "^1.2.6",
+    "axios": "^0.26.0",
+    "core-js": "^3.21.1",
+    "element-plus": "^2.0.2",
+    "path-browserify": "^1.0.1",
+    "url": "^0.11.0",
     "vue": "^3.2.13",
     "vue-class-component": "^8.0.0-0"
   },
