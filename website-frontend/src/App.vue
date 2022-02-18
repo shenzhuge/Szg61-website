@@ -70,7 +70,7 @@ import GamesController from './components/GamesController.vue'
 import TestButton from './components/TestButton.vue'
 import VersionLogButton from './components/VersionLogButton.vue'
 
-export default {
+const App = {
   name: 'App',
   components: {Coordinate, Avatar, SearchBox, AccountButton, GamesController, TestButton, VersionLogButton},
   data() {
@@ -88,6 +88,7 @@ export default {
     }
   }
 }
+export default App
 </script>
 
 <style scoped>

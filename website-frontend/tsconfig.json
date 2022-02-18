@@ -2,7 +2,8 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "strict": false,
+    "strict": false, // 全strict有些地方很难受，单独把vue要求的noImplicitThis拿出来设置
+    "noImplicitThis": true,
     "jsx": "preserve",
     "moduleResolution": "node",
     "experimentalDecorators": true,
