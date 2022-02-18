@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import {computed} from 'vue'
 import GuessColor from './games/GuessColor.vue'
 
 const GamesController = {
