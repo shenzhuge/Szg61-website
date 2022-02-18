@@ -1,0 +1,29 @@
+server:
+  port: 80
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://49.232.222.116:3306/website
+    username: root
+    password: 6ZG433mEGEwRpihp
+    druid:
+      stat-view-servlet:
+        enabled: true
+        url-pattern: "/druid/*"
+        login-username: szg
+        login-password: wangzhu
+      initial-size: 1
+      min-idle: 1
+      max-active: 5
+      time-between-eviction-runs-millis: 10000
+      pool-prepared-statements: false
+      filter:
+        stat:
+          merge-sql: true
+          slow-sql-millis: 1000
+      url: jdbc:mysql://49.232.222.116:3306/website
+  jpa:
+    database: mysql
+    open-in-view: false
