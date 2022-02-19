@@ -5,12 +5,6 @@ import work.szg61.website.account.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
-
 @RestController
 public class AccountController {
     private final AccountService accountService;
@@ -23,7 +17,7 @@ public class AccountController {
     /**
      * 注册请求
      *
-     * @param info     请求体，包含注册信息
+     * @param info 请求体，包含注册信息
      */
     @PostMapping("/account/register")
     public JSONObject register(@RequestBody JSONObject info) {
@@ -36,7 +30,7 @@ public class AccountController {
     /**
      * 登录请求
      *
-     * @param info     请求体，包含登录信息
+     * @param info 请求体，包含登录信息
      */
     @PostMapping("/account/login")
     public JSONObject login(@RequestBody JSONObject info) {
