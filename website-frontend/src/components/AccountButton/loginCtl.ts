@@ -3,6 +3,7 @@ import axios, {AxiosResponse} from "axios";
 import {onMounted, reactive, ref} from "vue";
 import {axiosConfiguration} from "@/main";
 import {cookieHandler} from "@/utils/CookieHandler"
+import FastElMessage from "@/utils/FastElMessage";
 
 interface UserInfo {
     userId: string,
@@ -84,23 +85,10 @@ export function useLoginCtl(userInfo: UserInfo) {
                 if (checkResult(re)) {
                     dialogVisible.value = false
                     cookieHandler.setCookie("userId", userInfo.userId, 30, '/account')
-                    ElMessage({
-                        type: 'success',
-                        message: '登录成功'
-                    })
-                } else {
-                    ElMessage({
-                        type: 'error',
-                        message: re.data.status
-                    })
-                }
+                    FastElMessage.success('登录成功')
+                } else FastElMessage.error(re.data.status)
             })
-        } else {
-            ElMessage({
-                type: 'error',
-                message: '用户名密码长度检测错误，用户名不长于16位，密码在3~16位之间'
-            })
-        }
+        } else FastElMessage.error('用户名密码长度检测错误，用户名不长于16位，密码在3~16位之间')
     }
 
     function register() {
@@ -122,29 +110,13 @@ export function useLoginCtl(userInfo: UserInfo) {
                     if (checkResult(re)) {
                         dialogVisible.value = false
                         cookieHandler.setCookie("userId", userInfo.userId, 30, '/account')
-                        ElMessage({
-                            type: 'success',
-                            message: '注册成功'
-                        })
-                    } else {
-                        ElMessage({
-                            type: 'error',
-                            message: re.data.status
-                        })
-                    }
+                        FastElMessage.success('注册成功')
+                    } else FastElMessage.error(re.data.status)
                 }).catch(function () {
-                    ElMessage({
-                        type: 'info',
-                        message: '注册取消'
-                    })
+                    FastElMessage.info('注册取消')
                 })
             })
-        } else {
-            ElMessage({
-                type: 'error',
-                message: '用户名密码格式不符合要求'
-            })
-        }
+        } else FastElMessage.error('用户名密码格式不符合要求')
     }
 
     function logout() {
@@ -163,12 +135,8 @@ export function useLoginCtl(userInfo: UserInfo) {
             url: '/account/autoLogin',
             method: 'POST',
         }).then(function (re) {
-            if (!checkResult(re) && re.data.status !== 'no cookie') {
-                ElMessage({
-                    type: 'error',
-                    message: re.data.status
-                })
-            }
+            if (!checkResult(re) && re.data.status !== 'no cookie')
+                FastElMessage.error(re.data.status)
         })
     })
 

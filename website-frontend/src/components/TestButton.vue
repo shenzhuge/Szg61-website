@@ -4,8 +4,8 @@
 
 <script lang="ts">
 import {axiosConfiguration} from "@/main";
-import axios, {AxiosPromise, AxiosResponse} from "axios";
 import FastElMessage from "@/utils/FastElMessage";
+import axios from "axios";
 
 const TestButton = {
   name: "Test",
@@ -17,7 +17,6 @@ const TestButton = {
 
       axiosConfiguration()
       let re
-      const fastElMessage = new FastElMessage()
 
       // 测试注册
       re = await axios({
@@ -26,7 +25,7 @@ const TestButton = {
         data: {username: username, password: password}
       })
       if (re.data.status !== 'ok') {
-        fastElMessage.warning(re.data.status)
+        FastElMessage.warning(re.data.status)
         return
       } else id = re.data.id
 
@@ -37,7 +36,7 @@ const TestButton = {
         data: {username: username, password: password}
       })
       if (re.data.status !== 'ok') {
-        fastElMessage.warning(re.data.status)
+        FastElMessage.warning(re.data.status)
         return
       }
 
@@ -47,7 +46,7 @@ const TestButton = {
         method: 'POST',
       })
       if (re.data.status !== 'ok') {
-        fastElMessage.warning(re.data.status)
+        FastElMessage.warning(re.data.status)
         return
       }
 
@@ -57,8 +56,8 @@ const TestButton = {
         method: 'POST',
         data: {id: id}
       })
-      if (re.data !== 'ok') fastElMessage.warning(re.data)
-      else fastElMessage.success("测试通过")
+      if (re.data !== 'ok') FastElMessage.warning(re.data)
+      else FastElMessage.success("测试通过")
     }
 
     function ButtonClicked() {
