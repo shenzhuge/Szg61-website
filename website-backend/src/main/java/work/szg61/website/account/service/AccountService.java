@@ -46,7 +46,7 @@ public class AccountService {
         newEntity.setLastLogin(time);
 
         try {
-            newEntity = accountRepository.save(newEntity);
+            accountRepository.save(newEntity);
             re.put("status", "ok");
             putAccountInfoMap(re, newEntity);
         } catch (Exception e) {
@@ -73,8 +73,7 @@ public class AccountService {
         if (e.isPresent()) {
             if (e.get().getPassword().equals(password)) {
                 re.put("status", "ok");
-                putAccountInfoMap(re, e.get());
-                updateLoginTime(e.get());
+                putAccountInfoMap(re, updateLoginTime(e.get()));
             } else {
                 re.put("status", "密码错误");
             }
@@ -97,7 +96,7 @@ public class AccountService {
         JSONObject re = new JSONObject();
         if (e.isPresent()) {
             re.put("status", "ok");
-            putAccountInfoMap(re, e.get());
+            putAccountInfoMap(re, updateLoginTime(e.get()));
         } else re.put("status", "自动登录失败");
 
         return re;
@@ -121,9 +120,10 @@ public class AccountService {
      *
      * @param e 要更新的词条
      */
-    private void updateLoginTime(AccountEntity e) {
+    private AccountEntity updateLoginTime(AccountEntity e) {
         e.setLastLogin(new Date().getTime());
-        accountRepository.save(e);
+        accountRepository.updateLastLogin(e.getId(), e.getLastLogin());
+        return e;
     }
 
     /**

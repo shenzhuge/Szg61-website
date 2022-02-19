@@ -4,65 +4,61 @@
 
 <script lang="ts">
 import {axiosConfiguration} from "@/main";
-import axios from "axios";
+import axios, {AxiosPromise, AxiosResponse} from "axios";
+import FastElMessage from "@/utils/FastElMessage";
 
 const TestButton = {
   name: "Test",
   setup() {
-    function AccountTest() {
+    async function AccountTest() {
       let username = 'username' + Math.floor(Math.random() * 1000)
       let password = 'password' + Math.floor(Math.random() * 1000)
       let id = ''
 
       axiosConfiguration()
+      let re
+      const fastElMessage = new FastElMessage()
+
       // 测试注册
-      axios({
+      re = await axios({
         url: '/account/register',
         method: 'POST',
         data: {username: username, password: password}
-      }).then(function (re) {
-        if (re.data.status !== 'ok') alert(re.data.status)
-        else {
-          id = re.data.id
-          // 测试登录
-          axios({
-            url: '/account/login',
-            method: 'POST',
-            data: {username: username, password: password}
-          }).then(function (re) {
-            if (re.data.status !== 'ok') alert(re.data.status)
-            else {
-              // 测试自动登录
-              axios({
-                url: '/account/autoLogin',
-                method: 'POST',
-                data: {username: username, password: password}
-              }).then(function (re) {
-                if (re.data.status !== 'ok') alert(re.data.status)
-                else {
-                  // 测试登出
-                  axios({
-                    url: '/account/logout',
-                    method: 'POST',
-                  }).then(function () {
-                    // 测试注销
-                    axios({
-                      url: '/account/destroy',
-                      method: 'POST',
-                      data: {id: id}
-                    }).then(function (re) {
-                      if (re.data !== 'ok') alert(re.data)
-                      else {
-                        alert("测试通过")
-                      }
-                    })
-                  })
-                }
-              })
-            }
-          })
-        }
       })
+      if (re.data.status !== 'ok') {
+        fastElMessage.warning(re.data.status)
+        return
+      } else id = re.data.id
+
+      // 测试登录
+      re = await axios({
+        url: '/account/login',
+        method: 'POST',
+        data: {username: username, password: password}
+      })
+      if (re.data.status !== 'ok') {
+        fastElMessage.warning(re.data.status)
+        return
+      }
+
+      // 测试自动登录
+      re = await axios({
+        url: '/account/autoLogin',
+        method: 'POST',
+      })
+      if (re.data.status !== 'ok') {
+        fastElMessage.warning(re.data.status)
+        return
+      }
+
+      // 测试注销
+      re = await axios({
+        url: '/account/destroy',
+        method: 'POST',
+        data: {id: id}
+      })
+      if (re.data !== 'ok') fastElMessage.warning(re.data)
+      else fastElMessage.success("测试通过")
     }
 
     function ButtonClicked() {

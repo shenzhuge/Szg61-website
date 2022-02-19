@@ -9,11 +9,11 @@ spring:
     username: root
     password: 6ZG433mEGEwRpihp
     druid:
-      stat-view-servlet:
-        enabled: true
-        url-pattern: "/druid/*"
-        login-username: szg
-        login-password: wangzhu
+#      stat-view-servlet:
+#        enabled: true
+#        url-pattern: "/druid/*"
+#        login-username: szg
+#        login-password: wangzhu
       initial-size: 1
       min-idle: 1
       max-active: 5
@@ -24,6 +24,6 @@ spring:
           merge-sql: true
           slow-sql-millis: 1000
       url: jdbc:mysql://49.232.222.116:3306/website
-  jpa:
-    database: mysql
-    open-in-view: false
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

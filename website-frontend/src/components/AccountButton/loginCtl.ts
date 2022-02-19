@@ -2,7 +2,7 @@ import {ElMessage, ElMessageBox} from "element-plus";
 import axios, {AxiosResponse} from "axios";
 import {onMounted, reactive, ref} from "vue";
 import {axiosConfiguration} from "@/main";
-import {cookieHandler} from "@/utils/cookieHandler"
+import {cookieHandler} from "@/utils/CookieHandler"
 
 interface UserInfo {
     userId: string,
