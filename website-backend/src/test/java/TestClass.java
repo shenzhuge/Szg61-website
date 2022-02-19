@@ -9,7 +9,7 @@ public class TestClass {
 
     @Test
     public void test() {
-        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(1644058555399L)));
+        System.out.println(new Date().getTime());
     }
 
     private void idConvertTest(){

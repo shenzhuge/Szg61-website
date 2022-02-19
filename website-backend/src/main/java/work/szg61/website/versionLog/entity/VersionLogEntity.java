@@ -1,16 +1,17 @@
 package work.szg61.website.versionLog.entity;
 
 public class VersionLogEntity {
-    private int id;
+    private int version;
     private String content;
+    private long timeStamp;
     private VersionLogType type;
 
-    public int getId() {
-        return id;
+    public int getVersion() {
+        return version;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setVersion(int version) {
+        this.version = version;
     }
 
     public String getContent() {
@@ -19,6 +20,14 @@ public class VersionLogEntity {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public long getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
     public VersionLogType getType() {

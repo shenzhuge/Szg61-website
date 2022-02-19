@@ -1,6 +1,6 @@
 <template>
   <el-button size="small" @click="logDialogVisible=true">更新日志</el-button>
-  <ShowVersionLogDialog v-model:visible="logDialogVisible"></ShowVersionLogDialog>
+  <ShowVersionLogDialog :visible="logDialogVisible" :identified="identified" @hide="logDialogVisible=false"></ShowVersionLogDialog>
 </template>
 
 <script lang="ts">
@@ -10,6 +10,7 @@ import ShowVersionLogDialog from './VersionLogButton/ShowVersionLogDialog.vue'
 const VersionLogButton = {
   name: "VersionLogButton",
   components: {ShowVersionLogDialog},
+  props: ['identified'],
   setup() {
     const logDialogVisible = ref(false)
 

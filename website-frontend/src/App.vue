@@ -52,8 +52,8 @@
       </label>
       <label class="footer-font">☯ 2022-2023 szg61.work | made by szg</label>
       <span>
-        <TestButton v-if="userId==='EOfLCtx_ws'"></TestButton>
-        <VersionLogButton v-if="userId==='EOfLCtx_ws'"></VersionLogButton>
+        <TestButton v-if="identified"></TestButton>
+        <VersionLogButton :identified="identified"></VersionLogButton>
       </span>
     </el-footer>
   </el-container>
@@ -62,7 +62,7 @@
 </template>
 
 <script lang="ts">
-import {ref} from 'vue';
+import {ref, computed} from 'vue';
 import {Coordinate, Avatar} from '@element-plus/icons-vue'
 import SearchBox from './components/SearchBox.vue'
 import AccountButton from './components/AccountButton.vue'
@@ -73,21 +73,30 @@ import VersionLogButton from './components/VersionLogButton.vue'
 const App = {
   name: 'App',
   components: {Coordinate, Avatar, SearchBox, AccountButton, GamesController, TestButton, VersionLogButton},
-  data() {
-    return {
-      userId: '',
-    }
-  },
   setup() {
+    const {userId, identified} = useUserCtl()
+
     const gameVisible = ref(false)
     const game = ref('')
 
     return {
+      userId,
+      identified,
       gameVisible,
       game,
     }
   }
 }
+
+function useUserCtl() {
+  const userId = ref('')
+  const identified = computed(() => userId.value === 'EOfLCtx_ws')
+
+  return {
+    userId, identified
+  }
+}
+
 export default App
 </script>
 
